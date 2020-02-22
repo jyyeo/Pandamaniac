@@ -11,15 +11,19 @@ def erdos_renyi(n,p):
 
 def convert_to_json(adj_mat):
     adj_dic = {}
+    output = open("x.x.x.json","w")
     for i in range(len(adj_mat)):
         neighbors = []
         for j in range(len(adj_mat[i])):
             if adj_mat[i,j] == 1:
                 neighbors.append(str(j))
         adj_dic[str(i)] = neighbors
-    return json.dumps(adj_dic)
+    return json.dump(adj_dic, output)
+    output.close()
 
 n = 100
 p = 0.5
-adj_mat = erdos_renyi(n,p)
-json_graph = convert_to_json(adj_mat)
+graph = erdos_renyi(n,p)
+print(convert_to_json(graph))
+
+
