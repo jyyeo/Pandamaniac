@@ -1,24 +1,38 @@
+#!/usr/bin/python3
+
 import sys
 import os
 import json
+
 import random_samplers
+import central_nodes
 
-# Load graph file
-in_graph = sys.argv[1]
-with open(in_graph) as gf:
-    graph_data = json.load(gf)
-    
-graph_info = os.path.basename(sys.argv[1]).split(".")
+import ta_degree
+import ta_less
+import ta_more
 
-n_players = int(graph_info[0])
-n_seeds = int(graph_info[1])
-n_rounds = 50
+def main(in_graph, outfile):
+    # Load graph file
+    with open(in_graph) as gf:
+        graph_data = json.load(gf)
+        
+    graph_info = os.path.basename(sys.argv[1]).split(".")
 
-# CALL FUNCTION TO GET SEED NODES HERE
-seed_nodes = random_samplers.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    n_players = int(graph_info[0])
+    n_seeds = int(graph_info[1])
+    n_rounds = 50
 
-outfile = sys.argv[2]
-with open(outfile, 'w') as of:
-    for round in seed_nodes:
-        for node in round:
-            of.write(node + "\n")
+    # CALL FUNCTION TO GET SEED NODES HERE
+    seed_nodes = ta_more.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+
+    with open(outfile, 'w') as of:
+        for round in seed_nodes:
+            for node in round:
+                of.write(node + "\n")
+
+if __name__ == "__main__":
+    if len(sys.argv) != 3:
+        print("Usage: python3 main.py [x.x.x.json] [output_file]")
+        exit(1)
+
+    main(sys.argv[1], sys.argv[2])
