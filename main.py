@@ -5,7 +5,7 @@ import os
 import json
 
 import random_samplers
-import central_nodes
+import top_closeness
 
 import ta_degree
 import ta_less
@@ -23,7 +23,7 @@ def main(in_graph, outfile):
     n_rounds = 50
 
     # CALL FUNCTION TO GET SEED NODES HERE
-    seed_nodes = ta_more.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    seed_nodes = top_closeness.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
 
     with open(outfile, 'w') as of:
         for round in seed_nodes:

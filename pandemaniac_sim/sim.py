@@ -82,11 +82,13 @@ def run_simulation(adj_list, node_mappings):
   # Keep calculating the epidemic until it stops changing. Randomly choose
   # number between 100 and 200 as the stopping point if the epidemic does not
   # converge.
+  hist = []
   prev = None
   nodes = adj_list.keys()
   last_iter = randint(100, 200)
   while not is_stable(generation, last_iter, prev, node_color):
     prev = deepcopy(node_color)
+    hist.append((generation, prev))
     for node in nodes:
       (changed, color) = update(adj_list, prev, node)
       # Store the node's new color only if it changed.
@@ -97,7 +99,7 @@ def run_simulation(adj_list, node_mappings):
     # of the epidemic.
     generation += 1
 
-  return get_result(node_mappings.keys(), node_color)
+  return (get_result(node_mappings.keys(), node_color), hist)
 
 
 def init(color_nodes, node_color):
