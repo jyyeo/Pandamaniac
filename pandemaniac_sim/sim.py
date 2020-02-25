@@ -49,7 +49,7 @@ from copy import deepcopy
 from random import randint
 
 
-def run(adj_list, node_mappings):
+def run(adj_list, node_mappings, return_hist=False):
   """
   Function: run
   -------------
@@ -59,11 +59,11 @@ def run(adj_list, node_mappings):
   node_mappings: A dictionary where the key is a name and the value is a list
                  of seed nodes associated with that name.
   """
-  results = run_simulation(adj_list, node_mappings)
+  results = run_simulation(adj_list, node_mappings, return_hist)
   return results
 
 
-def run_simulation(adj_list, node_mappings):
+def run_simulation(adj_list, node_mappings, return_hist=False):
   """
   Function: run_simulation
   ------------------------
@@ -88,7 +88,10 @@ def run_simulation(adj_list, node_mappings):
   last_iter = randint(100, 200)
   while not is_stable(generation, last_iter, prev, node_color):
     prev = deepcopy(node_color)
-    hist.append((generation, prev))
+    
+    if return_hist:
+      hist.append((generation, prev))
+
     for node in nodes:
       (changed, color) = update(adj_list, prev, node)
       # Store the node's new color only if it changed.
@@ -99,7 +102,11 @@ def run_simulation(adj_list, node_mappings):
     # of the epidemic.
     generation += 1
 
-  return (get_result(node_mappings.keys(), node_color), hist)
+  result = get_result(node_mappings.keys(), node_color)
+  if return_hist:
+    return (result, hist)
+  else:
+    return result
 
 
 def init(color_nodes, node_color):

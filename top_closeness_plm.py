@@ -24,7 +24,7 @@ def get_seed_nodes(graph_data, n_players, n_seeds, n_rounds):
     print("[INFO]: |V|={}, |E|={}, seeds={}, iters={}".format(
         N, G.numberOfEdges(), n_seeds, n_rounds))
 
-    plm_partition = nk.community.PLM(G).run().getPartition()
+    plm_partition = nk.community.PLM(G, turbo=True).run().getPartition()
     partition_size_map = plm_partition.subsetSizeMap()
     largest = heapq.nlargest(2, partition_size_map, key=lambda x: partition_size_map[x])
     
