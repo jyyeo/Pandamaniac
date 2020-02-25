@@ -35,7 +35,9 @@ def get_seed_nodes(graph_data, n_players, n_seeds, n_rounds):
         if len(nodes) == n_seeds:
             seeds.append(nodes)
         else:
-            seeds.append(nodes[:n_seeds] + [np.random.choice(nodes[n_seeds:])])
+            # TODO: Add an element of randomness so that we pick exactly
+            # n_seeds nodes.
+            seeds.append(nodes[:n_seeds])
 
 
     return [[str(node) for node in round] for round in seeds]
