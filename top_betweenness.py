@@ -23,20 +23,15 @@ def get_seed_nodes(graph_data, n_players, n_seeds, n_rounds):
     print("[INFO]: |V|={}, |E|={}, seeds={}, iters={}".format(
         N, G.numberOfEdges(), n_seeds, n_rounds))
 
-    # this is O(|V|*|E|), pretty fast even on 10k nodes
-    tc = nk.centrality.TopHarmonicCloseness(G, k=n_seeds)
-    tc.run()
+    # this is O(m)
+    bc = nk.centrality.EstimateBetweenness(G, nSamples=8, normalized=True)
+    bc.run()
 
-    nodes = tc.topkNodesList(includeTrail=True)
+    nodes = [x[0] for x in bc.ranking()[:n_seeds]]
     # scores = tc.topkScoresList()
 
     seeds = []
     for _ in range(n_rounds):
-        if len(nodes) == n_seeds:
-            seeds.append(nodes)
-        else:
-            # take the top (n_seeds - 1) and one randomly from the 'trail'
-            seeds.append(nodes[:n_seeds - 1] + [np.random.choice(nodes[n_seeds:])])
-
+        seeds.append(nodes)
 
     return [[str(node) for node in round] for round in seeds]

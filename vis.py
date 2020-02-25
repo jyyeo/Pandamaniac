@@ -14,6 +14,7 @@ from pandemaniac_sim import sim
 
 import random_samplers
 import top_closeness
+import top_betweenness
 
 import ta_degree
 import ta_less
