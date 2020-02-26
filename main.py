@@ -6,6 +6,7 @@ import json
 
 import random_samplers
 import top_closeness
+import beat_ta_degree2
 
 import ta_degree
 import ta_less
@@ -23,7 +24,10 @@ def main(in_graph, outfile):
     n_rounds = 50
 
     # CALL FUNCTION TO GET SEED NODES HERE
-    seed_nodes = top_closeness.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    if n_players < 8:
+        seed_nodes = beat_ta_degree2.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    else:
+        seed_nodes = top_closeness.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
 
     with open(outfile, 'w') as of:
         for round in seed_nodes:

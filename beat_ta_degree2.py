@@ -10,6 +10,8 @@ from collections import defaultdict
 from pandemaniac_sim import sim
 import ta_degree
 
+
+
 def make_graph_from_json(json_data):
     G = nk.Graph()
 
