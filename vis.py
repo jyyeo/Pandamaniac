@@ -18,6 +18,7 @@ import top_betweenness
 import combined_centrality
 import beat_ta_degree
 import beat_ta_degree2
+import k_truss
 
 import ta_degree
 import ta_less
