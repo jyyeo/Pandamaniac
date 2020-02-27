@@ -27,7 +27,7 @@ def create_deg_ctr_neighbors(ctr_ind):
 filename = input("filename: ")
 with open(filename) as data_file:
     data = json.load(data_file)
-num_seeds = int((os.path.splitext(filename)[0]).split(".")[2])
+num_seeds = int((os.path.splitext(filename)[0]).split(".")[1])
 num_nodes = len(data)
 adj_mat = np.zeros((num_nodes,num_nodes))
 for i in range(num_nodes):
