@@ -54,7 +54,6 @@ def get_seed_nodes(graph_data, n_players, n_seeds, n_rounds):
             found = True
             break
 
-
     if not found:
         print("can't beat them :(")
         seeds = []

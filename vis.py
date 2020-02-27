@@ -13,7 +13,7 @@ import matplotlib.pyplot as plt
 from pandemaniac_sim import sim
 
 import random_samplers
-import top_closeness
+import top_closeness_random
 import top_betweenness
 import combined_centrality
 import beat_ta_degree
@@ -40,11 +40,16 @@ def main(in_graph):
     # CALL FUNCTION TO GET SEED NODES HERE
     s1 = ta_degree.get_seed_nodes(graph, n_players, n_seeds, n_rounds)
     s2 = beat_ta_degree2.get_seed_nodes(graph, n_players, n_seeds, n_rounds)
+    # s3 = k_truss.get_seed_nodes(graph, n_players, n_seeds, n_rounds)
+    # s4 = top_closeness_random.get_seed_nodes(graph, n_players, n_seeds, n_rounds)
 
-    s1_name = 'degree'
+    s1_name = 'ta_degree'
     s2_name = 'beat_ta_degree2'
+    s3_name = 'k_truss'
+    s4_name = 'top_closeness_random'
 
     nodes = {s1_name: s1[0], s2_name: s2[0]}
+    # nodes = {s1_name: s1[0], s2_name: s2[0], s3_name: s3[0], s4_name: s4[0]}
 
     result, hist = sim.run(graph, nodes, return_hist=True)
     G = nx.Graph(graph)
@@ -65,8 +70,12 @@ def main(in_graph):
                     colors.append('k')
                 elif node_colors[node] == s1_name:
                     colors.append('b')
-                else:
+                elif node_colors[node] == s2_name:
                     colors.append('r')
+                elif node_colors[node] == s3_name:
+                    colors.append('c')
+                elif node_colors[node] == s4_name:
+                    colors.append('m')
             else:
                 colors.append('k')
    
