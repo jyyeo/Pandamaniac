@@ -26,11 +26,13 @@ def main(in_graph, outfile):
     n_rounds = 50
 
     # CALL FUNCTION TO GET SEED NODES HERE
-    if n_players == 2:
-        seed_nodes = beat_ta_degree2.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
-    else:
-        seed_nodes = k_truss.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    #if n_players == 2:
+    #    seed_nodes = beat_ta_degree2.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    #else:
+    #    seed_nodes = k_truss.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     # seed_nodes = least_connected.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    
+    seed_nodes = top_closeness_random.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
 
     with open(outfile, 'w') as of:
         for round in seed_nodes:
