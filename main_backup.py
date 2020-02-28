@@ -9,6 +9,7 @@ import top_closeness_random
 import beat_ta_degree2
 import k_truss
 import least_connected
+import cluster_cluster
 
 import ta_degree
 import ta_less
@@ -32,7 +33,7 @@ def main(in_graph, outfile):
     #    seed_nodes = k_truss.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     # seed_nodes = least_connected.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     
-    seed_nodes = top_closeness_random.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+    seed_nodes = cluster_cluster.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
 
     with open(outfile, 'w') as of:
         for round in seed_nodes:
