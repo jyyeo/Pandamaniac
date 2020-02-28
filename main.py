@@ -8,6 +8,7 @@ import random_samplers
 import top_closeness_random
 import beat_ta_degree2
 import k_truss
+import k_core
 import least_connected
 
 import ta_degree
@@ -27,9 +28,9 @@ def main(in_graph, outfile):
 
     # CALL FUNCTION TO GET SEED NODES HERE
     if n_players == 2:
-        seed_nodes = beat_ta_degree2.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+        seed_nodes = top_closeness_random.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     else:
-        seed_nodes = k_truss.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+        seed_nodes = k_core.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     # seed_nodes = least_connected.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
 
     with open(outfile, 'w') as of:
