@@ -10,6 +10,7 @@ import beat_ta_degree2
 import k_truss
 import k_core
 import least_connected
+import degree_based_strategy
 
 import ta_degree
 import ta_less
@@ -30,7 +31,8 @@ def main(in_graph, outfile):
     if n_players == 2:
         seed_nodes = top_closeness_random.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     else:
-        seed_nodes = k_core.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+        seed_nodes = degree_based_strategy.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
+        #seed_nodes = k_core.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
     # seed_nodes = least_connected.get_seed_nodes(graph_data, n_players, n_seeds, n_rounds)
 
     with open(outfile, 'w') as of:
