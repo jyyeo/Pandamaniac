@@ -120,9 +120,7 @@ def get_seed_nodes(graph_data, n_players, n_seeds, n_rounds):
         # choose all nodes from largest component
         nodes = [str(x) for x in cores.getMembers(largest_core)]
         print(nodes)
-  
-
-    # prep everything for export
+    
     seeds = []
     for _ in range(n_rounds):
         seeds.append(np.random.choice(nodes, n_seeds))
